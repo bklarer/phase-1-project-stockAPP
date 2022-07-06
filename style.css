@@ -1,0 +1,38 @@
+body {
+    margin: 0;
+    font-family: monospace;
+}
+
+#page-header {
+    display: flex;
+    font-size: x-large;
+    color: white;
+    justify-content: center;
+    margin: 0 auto;
+    background: green;
+    height: 8rem;
+}
+
+#form-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+#ticker {
+    height: 100px;
+    width: 250px;
+    font-size: 35px;
+    text-align: center;  
+}
+
+input[type="submit"] {
+    cursor: pointer;
+    height: 100px;
+    width: 200px;
+    font-size: 35px;
+}
+
+input[type="submit"]:hover {
+    background-color: greenyellow;
+}
