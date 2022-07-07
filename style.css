@@ -3,6 +3,10 @@ body {
     font-family: monospace;
 }
 
+h1 {
+    text-align: center;
+}
+
 th {
     font-size: 35px;
     font-style: bold;
