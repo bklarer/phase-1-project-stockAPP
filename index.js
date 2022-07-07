@@ -160,3 +160,5 @@ function exportWatchlist () {
     document.body.removeChild(link);
 
 }
+
+document.addEventListener("DOMContentLoaded", handleSubmit)
