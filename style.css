@@ -20,6 +20,10 @@ td, tr {
     font-size: 30px;
 }
 
+tr:nth-child(even) {
+    background-color: #eee;
+}
+
 table, th, td, tr {
     margin: auto;
     padding: 10px;
