@@ -45,20 +45,19 @@ table, th, td, tr {
 }
 
 #double-list {
+    width: 100%;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
 }
 
 #directions {
-    float: left;
-    width: auto;
-    height: auto;
     margin: 30px;
+    margin-left: 30px;
     padding-right: 100px;
     padding-left: 100px;
-    background-color: yellowgreen;
-    box-shadow: 8em;
+    background-color: rgb(131, 238, 59);
+    box-shadow:  12px 12px 2px 1px black;
 }
 
 #listDirections {
@@ -66,20 +65,11 @@ table, th, td, tr {
 }
 
 #watchlist {
-    float: left;
-    width: auto;
-    height: auto;
     margin: 30px;
+    margin-right: 30px;
     font-size: 20px;
     padding-right: 100px;
     padding-left: 100px;
-}
-
-#top-stocks {
-    float: left;
-    width: auto;
-    height: auto;
-    margin: 30px;
 }
 
 #form-container {
