@@ -100,7 +100,7 @@ function searchResults (data) {
             addBttn.className = "add";
             addBttn.addEventListener("click", () => {
                 addToWatchlist(watchlistSymbol, watchlistPrice)
-                addBttn.disabled = true;
+                searchResult.remove()
             }
         );
             
@@ -118,6 +118,7 @@ function addToWatchlist(watchlistSymbol, watchlistPrice) {
     const deletebttn = document.createElement("button");
         deletebttn.textContent = "delete";
         deletebttn.className = "delete";
+        deletebttn.addEventListener("click", () => watchlistRow.remove())
 
 
     watchlistRow.append(watchlistSymbol, watchlistPrice, deletebttn);
