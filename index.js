@@ -29,9 +29,10 @@ function handleSubmit (e) {
             stockForm.reset()
             }
         )
-        .catch(error => 
-        console.log(error)); //crypto not found
-
+        .catch(error => {
+        console.log(error);
+        alert("Server Error") //crypto not found
+        })
 }
 
 
