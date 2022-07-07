@@ -3,6 +3,7 @@ body {
     font-family: monospace;
 }
 
+
 h1 {
     text-align: center;
 }
@@ -49,12 +50,24 @@ table, th, td, tr {
     flex-wrap: wrap;
 }
 
+#directions {
+    float: left;
+    width: auto;
+    height: auto;
+    margin: 30px;
+    padding-right: 100px;
+    padding-left: 100px;
+    background-color: yellowgreen;
+}
+
 #watchlist {
     float: left;
     width: auto;
     height: auto;
     margin: 30px;
     font-size: 20px;
+    padding-right: 100px;
+    padding-left: 100px;
 }
 
 #top-stocks {
