@@ -11,21 +11,34 @@
 
         </div>
         
+        <div id="double-list">
+            <div id="watchlist">
+                <h1>Watchlist</h1>
+            </div>
+
+            <div id="top-stocks">
+                <h1>Top 10 Percent Gainers</h1>
+            </div>
+        </div>        
+        
         <div id="form-container">
             <form id="stock-form">
                 <input type="text" id="ticker" placeholder="Crypto Symbol"/>
-                <input type="submit" id="submit-button" value="Add" />
+                <input type="submit" id="submit-button" value="Search" />
             </form>
         </div>
 
-        <div id="watchlist">
-            <h1>Watchlist</h1>
+        <div id="searchContainer">
+            <table id="resultsTable">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Symbol</th>
+                    <th>Market Cap Rank</th>
+                </tr>
+            </table>
         </div>
 
-        <div id="top-stocks">
-            <h1>Top 10 Percent Gainers</h1>
-        </div>
- 
         <script src="index.js"></script>
     </body>
 </html>

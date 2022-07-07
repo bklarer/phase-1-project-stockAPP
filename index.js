@@ -4,8 +4,10 @@ const BASE_URL = "https://api.coingecko.com/api/v3/search?query=";
 const submitBttn = document.querySelector("#submit-button");
 const tickerInput = document.querySelector("#ticker").value;
 const stockForm = document.querySelector("#stock-form");
+const searchContainer = document.querySelector("#searchContainer");
+const resultsTable = document.querySelector("#resultsTable");
 
-document.addEventListener("submit", handleSubmit)
+document.addEventListener("submit", handleSubmit);
 
 function handleSubmit (e) {
     e.preventDefault();
@@ -23,19 +25,33 @@ function handleSubmit (e) {
             }
         )
         .catch(error => 
-        console.log(error))
+        console.log(error));
 
 }
 
 
 function searchResults (data) {
-    const results = {}
-    const coin = data.coins
+    const results = {};
+    const coin = data.coins;
     for(i=0; i<10; i++) {
         results[i] = coin[i]
-        // results.search.name = coin[i].name
-        // results.search.symbol = coin[i].symbol
-        // results.search.market_cap_rank = coin[i].market_cap_rank
+        const searchResult = document.createElement("tr");
+        
+        const searchId = document.createElement("td");
+            searchId.textContent = results[i].id;
+        
+        const searchName = document.createElement("td");
+            searchName.textContent = results[i].name;
+        
+        const searchSymbol = document.createElement("td");
+            searchSymbol.textContent = results[i].symbol;
+        
+        const searchMarketCap = document.createElement("td");
+            searchMarketCap.textContent = results[i].market_cap_rank;
+        
+        
+            searchResult.append(searchId, searchName, searchSymbol, searchMarketCap);
+            resultsTable.append(searchResult);
     }
-    console.log(results)
+    console.log(results);
 }
