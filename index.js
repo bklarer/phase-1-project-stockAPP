@@ -1,4 +1,3 @@
-
 const BASE_URL = "https://api.coingecko.com/api/v3/search?query=";
 const PRICE_URL = "https://api.coingecko.com/api/v3/simple/price?ids="
 
@@ -9,10 +8,9 @@ const stockForm = document.querySelector("#stock-form");
 const searchContainer = document.querySelector("#searchContainer");
 const resultsTable = document.querySelector("#resultsTable");
 const watchlistTable = document.querySelector("#watchlistTable");
-const capTable = document.querySelector("#capTable");
 const tableHTML = '<tr><th>Name</th><th>Symbol</th><th>Market Cap Rank</th><th>Price(USD)</th><th>Add to Watchlist</th></tr>'
 
-document.addEventListener("submit", handleSubmit);
+stockForm.addEventListener("submit", handleSubmit); 
 
 function handleSubmit (e) {
     e.preventDefault();
@@ -28,7 +26,7 @@ function handleSubmit (e) {
         )
         .catch(error => {
         console.log(error);
-        alert("Server Error") //crypto not found
+        alert("Server Error")
         })
 }
 
@@ -66,7 +64,7 @@ function searchResults (data) {
             alert("Server Error");
         })
 
-    function tableMaker () {for(i=0; i<Math.min(10, results.length); i++) { //need if statement just in case
+    function tableMaker () {for(i=0; i<Math.min(10, results.length); i++) {
         const cryptoId = results[i].id;
         const dollarUS = Intl.NumberFormat("en-US", {
             style: "currency",
