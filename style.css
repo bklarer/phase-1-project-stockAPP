@@ -84,12 +84,18 @@ table, th, td, tr {
     border: 1px solid;
 }
 
+#export:hover {
+    background-color: yellow;
+    cursor: pointer;
+}
+
 .add {
     font-size: 25px;
 }
 
 .add:hover {
     background-color: greenyellow;
+    cursor: pointer;
 }
 
 .delete {
@@ -98,6 +104,7 @@ table, th, td, tr {
 
 .delete:hover {
     background-color: red;
+    cursor: pointer;
 }
 
 input[type="submit"] {
