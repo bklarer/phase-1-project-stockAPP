@@ -3,7 +3,7 @@ const BASE_URL = "https://api.coingecko.com/api/v3/search?query=";
 const PRICE_URL = "https://api.coingecko.com/api/v3/simple/price?ids="
 
 const submitBttn = document.querySelector("#submit-button");
-const tickerInput = document.querySelector("#ticker").value;
+const tickerInput = document.querySelector("#ticker");
 const stockForm = document.querySelector("#stock-form");
 const searchContainer = document.querySelector("#searchContainer");
 const resultsTable = document.querySelector("#resultsTable");
@@ -17,7 +17,7 @@ function handleSubmit (e) {
     
     
 
-    fetch(BASE_URL + `${tickerInput}`)
+    fetch(BASE_URL + `${tickerInput.value}`)
         .then(resp => resp.json())
         .then(data => {
             console.log(data)
@@ -36,47 +36,66 @@ function searchResults (data) {
     let priceIds = results[0]["id"]
     for(i=1; i<10; i++) {
         // idArray.push(results[i]["id"])
+        
         priceIds = priceIds + "%2C" + results[i]["id"]
     }
 
     console.log(priceIds)
 
     // console.log(PRICE_URL + priceIds + "&vs_currencies=usd")
+    let copyPrices = {}
 
     fetch(PRICE_URL + priceIds + "&vs_currencies=usd")
         .then(priceData => priceData.json())
         .then(prices => {
-            console.log(prices)}
+            copyPrices = prices
+            tableMaker()
+            console.log(prices)
+            console.log(copyPrices)
+            }
         )
         
         .catch(error => console.log(error));
 
-    // for(i=0; i<10; i++) { //need if statement just in case
-    //     results[i] = coin[i]
-    //     const searchResult = document.createElement("tr");
-    //         searchResult.id = results[i].id
+    function tableMaker () {for(i=0; i<10; i++) { //need if statement just in case
+        const cryptoId = results[i].id
+        const dollarUS = Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+        })
         
-    //     const searchId = document.createElement("td");
-    //         searchId.textContent = results[i].id;
-        
-    //     const searchName = document.createElement("td");
-    //         searchName.textContent = results[i].name;
-        
-    //     const searchSymbol = document.createElement("td");
-    //         searchSymbol.textContent = results[i].symbol;
-        
-    //     const searchMarketCap = document.createElement("td");
-    //         searchMarketCap.textContent = results[i].market_cap_rank;
+        results[i].price = dollarUS.format(copyPrices[cryptoId].usd)
 
+        const searchResult = document.createElement("tr");
+            searchResult.id = results[i].id
         
+        // const searchId = document.createElement("td");
+        //     searchId.textContent = results[i].id;
         
+        const searchName = document.createElement("td");
+            searchName.textContent = results[i].name;
         
-    //         searchResult.append(searchId, searchName, searchSymbol, searchMarketCap);
-    //         resultsTable.append(searchResult);
+        const searchSymbol = document.createElement("td");
+            searchSymbol.textContent = results[i].symbol;
+        
+        const searchMarketCap = document.createElement("td");
+            searchMarketCap.textContent = results[i].market_cap_rank;
 
+        const searchPrice = document.createElement("td");
+            searchPrice.textContent = results[i].price
+
+        const addBttn = document.createElement("button")
+            addBttn.textContent = "Add to Watchlist"
+            addBttn.className = "add"
+        
+            searchResult.append(searchName, searchSymbol, searchMarketCap, searchPrice, addBttn);
+            resultsTable.append(searchResult);
+        }
+    }
     console.log(results)
     
 }
+
 
         //need function to grab ids from results, and put into a string for the fetch above
         //once the fetch is initiated, I need to add the data to results
