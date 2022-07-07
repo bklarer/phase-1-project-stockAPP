@@ -15,10 +15,6 @@ document.addEventListener("submit", handleSubmit);
 
 function handleSubmit (e) {
     e.preventDefault();
-    
-    console.log("I work");
-    
-    
 
     fetch(BASE_URL + `${tickerInput.value}`)
         .then(resp => resp.json())
@@ -54,8 +50,6 @@ function searchResults (data) {
         } 
     }
 
-    console.log(`price ids = ${priceIds}`)
-
     let copyPrices = {}
 
     fetch(PRICE_URL + priceIds + "&vs_currencies=usd")
@@ -63,12 +57,13 @@ function searchResults (data) {
         .then(prices => {
             copyPrices = prices
             tableMaker()
-            console.log(prices)
-            console.log(copyPrices)
             }
         )
         
-        .catch(error => console.log(error));
+        .catch(error => {
+            console.log(error);
+            alert("Server Error");
+        })
 
     function tableMaker () {for(i=0; i<Math.min(10, results.length); i++) { //need if statement just in case
         const cryptoId = results[i].id;
@@ -114,7 +109,6 @@ function searchResults (data) {
             resultsTable.append(searchResult);
         }
     }
-    console.log(`results ${results}`)
     
 }
 
