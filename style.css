@@ -4,21 +4,25 @@ body {
 }
 
 th {
-    font-size: 20px;
+    font-size: 40px;
     font-style: bold;
-}
-
-tr {
-    text-align: center;
 }
 
 td {
     font-size: x-large;
 }
 
-table, th, td {
+td, tr {
+    font-size: 30px;
+}
+
+table, th, td, tr {
+    margin: auto;
+    padding: 10px;
     border: 1px solid;
     border-collapse: collapse;
+    align-items: center;
+    justify-content: center;
 }
 
 #page-header {
@@ -71,6 +75,22 @@ table, th, td {
 #resultsTable {
     width:100%;
     border: 1px solid;
+}
+
+.add {
+    font-size: 25px;
+}
+
+.add:hover {
+    background-color: greenyellow;
+}
+
+.delete {
+    font-size: 15px;
+}
+
+.delete:hover {
+    background-color: red;
 }
 
 input[type="submit"] {
