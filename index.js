@@ -3,6 +3,7 @@ const BASE_URL = "https://api.coingecko.com/api/v3/search?query=";
 const PRICE_URL = "https://api.coingecko.com/api/v3/simple/price?ids="
 
 const submitBttn = document.querySelector("#submit-button");
+const exportBttn = document.querySelector("#export")
 const tickerInput = document.querySelector("#ticker");
 const stockForm = document.querySelector("#stock-form");
 const searchContainer = document.querySelector("#searchContainer");
@@ -124,5 +125,38 @@ function addToWatchlist(watchlistSymbol, watchlistPrice) {
     watchlistRow.append(watchlistSymbol, watchlistPrice, deletebttn);
     watchlistTable.append(watchlistRow);
 
+}
+
+exportBttn.addEventListener("click", exportWatchlist)
+
+function exportWatchlist () {
+    const rows = []
+    
+    for(let i = 0, row; row = watchlistTable.rows[i]; i++ ) {
+        let column1 = row.cells[0].innerText;
+            column1 = column1.replace(",", "")
+        let column2 = row.cells[1].innerText;
+            column2 = column2.replace(",", "")
+
+        console.log(column1, column2)
+
+        rows.push([column1, column2])
+    }
+
+    let csvContent = "data:text/csv;charset=utf-8,";
+
+    rows.forEach((rowArray) => {
+        row = rowArray.join(",");
+        csvContent += row + "\r\n";
+    });
+
+    let encodedUri = encodeURI(csvContent);
+    let link = document.createElement("a")
+        link.setAttribute("href", encodedUri)
+        link.setAttribute("donload", "Crypto_Watchlist.csv");
+
+    document.body.appendChild(link);
+    link.click()
+    document.body.removeChild(link);
 
 }
