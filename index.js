@@ -9,6 +9,7 @@ const searchContainer = document.querySelector("#searchContainer");
 const resultsTable = document.querySelector("#resultsTable");
 const watchlistTable = document.querySelector("#watchlistTable");
 const capTable = document.querySelector("#capTable");
+const tableHTML = '<tr><th>Name</th><th>Symbol</th><th>Market Cap Rank</th><th>Price(USD)</th><th>Add to Watchlist</th></tr>'
 
 document.addEventListener("submit", handleSubmit);
 
@@ -22,6 +23,7 @@ function handleSubmit (e) {
     fetch(BASE_URL + `${tickerInput.value}`)
         .then(resp => resp.json())
         .then(data => {
+            resultsTable.innerHTML = tableHTML
             console.log(data)
             searchResults(data)
             stockForm.reset()
@@ -36,11 +38,14 @@ function handleSubmit (e) {
 function searchResults (data) {
     const results = data.coins.slice(0,10)
     let priceIds = results[0]["id"]
-    for(i=1; i<10; i++) {
-        priceIds = priceIds + "%2C" + results[i]["id"]
-    }
-
-    console.log(priceIds)
+    if (results.length === 1) {
+        priceIds = priceIds
+        } else {
+        for(i=1; i<Math.min(10, priceIds.length); i++) {
+            priceIds = priceIds + "%2C" + results[i]["id"]
+        }
+    }   
+    console.log(`price ids = ${priceIds}`)
 
     let copyPrices = {}
 
@@ -56,7 +61,7 @@ function searchResults (data) {
         
         .catch(error => console.log(error));
 
-    function tableMaker () {for(i=0; i<10; i++) { //need if statement just in case
+    function tableMaker () {for(i=0; i<Math.min(10, results.length); i++) { //need if statement just in case
         const cryptoId = results[i].id;
         const dollarUS = Intl.NumberFormat("en-US", {
             style: "currency",
@@ -100,7 +105,7 @@ function searchResults (data) {
             resultsTable.append(searchResult);
         }
     }
-    console.log(results)
+    console.log(`results ${results}`)
     
 }
 
