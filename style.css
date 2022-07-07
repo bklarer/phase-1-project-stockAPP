@@ -42,18 +42,20 @@ table, th, td, tr {
     margin: 0 auto;
     background: green;
     height: 8rem;
+    margin-bottom: 30px;
 }
 
-#double-list {
+/* #double-list {
     width: 100%;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-}
+} */
 
 #directions {
-    margin: 30px;
-    margin-left: 30px;
+    /* display: flex; */
+    max-width: 600px;
+    margin: auto;
     padding-right: 100px;
     padding-left: 100px;
     background-color: rgb(131, 238, 59);
@@ -70,6 +72,8 @@ table, th, td, tr {
     font-size: 20px;
     padding-right: 100px;
     padding-left: 100px;
+    align-items: center;
+    text-align: center;
 }
 
 #form-container {
