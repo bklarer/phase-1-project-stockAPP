@@ -12,6 +12,10 @@ tr {
     text-align: center;
 }
 
+td {
+    font-size: x-large;
+}
+
 table, th, td {
     border: 1px solid;
     border-collapse: collapse;
