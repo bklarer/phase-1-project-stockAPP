@@ -4,7 +4,7 @@ body {
 }
 
 th {
-    font-size: 40px;
+    font-size: 35px;
     font-style: bold;
 }
 
@@ -46,6 +46,7 @@ table, th, td, tr {
     width: auto;
     height: auto;
     margin: 30px;
+    font-size: 20px;
 }
 
 #top-stocks {
@@ -69,7 +70,9 @@ table, th, td, tr {
 }
 
 #searchContainer {
-    margin: 30px;
+    margin: 20px;
+    text-align: center;
+    font-size: 20px;
 }
 
 #resultsTable {
