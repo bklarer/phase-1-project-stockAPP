@@ -37,14 +37,22 @@ function handleSubmit (e) {
 
 function searchResults (data) {
     const results = data.coins.slice(0,10)
-    let priceIds = results[0]["id"]
-    if (results.length === 1) {
+    let priceIds
+
+    if(results.length == 0) {
+        console.log("No Results")
+    } else priceIds = results[0]["id"]
+    
+    if (data.coins.length == 0 ) {
+        alert("Crypto not found")
+    } else if (results.length === 1){
         priceIds = priceIds
         } else {
         for(i=1; i<Math.min(10, priceIds.length); i++) {
             priceIds = priceIds + "%2C" + results[i]["id"]
-        }
-    }   
+        } 
+    }
+
     console.log(`price ids = ${priceIds}`)
 
     let copyPrices = {}
