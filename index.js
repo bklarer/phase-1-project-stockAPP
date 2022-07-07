@@ -37,14 +37,11 @@ function searchResults (data) {
     const results = data.coins.slice(0,10)
     let priceIds = results[0]["id"]
     for(i=1; i<10; i++) {
-        // idArray.push(results[i]["id"])
-        
         priceIds = priceIds + "%2C" + results[i]["id"]
     }
 
     console.log(priceIds)
 
-    // console.log(PRICE_URL + priceIds + "&vs_currencies=usd")
     let copyPrices = {}
 
     fetch(PRICE_URL + priceIds + "&vs_currencies=usd")
@@ -70,9 +67,6 @@ function searchResults (data) {
 
         const searchResult = document.createElement("tr");
             searchResult.id = results[i].id;
-        
-        // const searchId = document.createElement("td");
-        //     searchId.textContent = results[i].id;
         
         const searchName = document.createElement("td");
             searchName.textContent = results[i].name;
@@ -101,7 +95,6 @@ function searchResults (data) {
             }
         );
             
-
             
             searchResult.append(searchName, searchSymbol, searchMarketCap, searchPrice, addBttn);
             resultsTable.append(searchResult);
@@ -111,15 +104,12 @@ function searchResults (data) {
     
 }
 
-function addToWatchlist(watchlistSymbol, watchlistPrice, addbttn) {
+function addToWatchlist(watchlistSymbol, watchlistPrice) {
     
     const watchlistRow = document.createElement("tr");
     const deletebttn = document.createElement("button");
         deletebttn.textContent = "delete";
         deletebttn.className = "delete";
-        // eventlistener needed 
-
-    
 
 
     watchlistRow.append(watchlistSymbol, watchlistPrice, deletebttn);
@@ -127,6 +117,3 @@ function addToWatchlist(watchlistSymbol, watchlistPrice, addbttn) {
 
 
 }
-
-        //need function to grab ids from results, and put into a string for the fetch above
-        //once the fetch is initiated, I need to add the data to results
