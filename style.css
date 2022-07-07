@@ -58,6 +58,11 @@ table, th, td, tr {
     padding-right: 100px;
     padding-left: 100px;
     background-color: yellowgreen;
+    box-shadow: 8em;
+}
+
+#listDirections {
+    font-size: 25px;
 }
 
 #watchlist {
