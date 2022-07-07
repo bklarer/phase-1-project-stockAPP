@@ -7,6 +7,8 @@ const tickerInput = document.querySelector("#ticker");
 const stockForm = document.querySelector("#stock-form");
 const searchContainer = document.querySelector("#searchContainer");
 const resultsTable = document.querySelector("#resultsTable");
+const watchlistTable = document.querySelector("#watchlistTable");
+const capTable = document.querySelector("#capTable");
 
 document.addEventListener("submit", handleSubmit);
 
@@ -58,7 +60,7 @@ function searchResults (data) {
         .catch(error => console.log(error));
 
     function tableMaker () {for(i=0; i<10; i++) { //need if statement just in case
-        const cryptoId = results[i].id
+        const cryptoId = results[i].id;
         const dollarUS = Intl.NumberFormat("en-US", {
             style: "currency",
             currency: "USD",
@@ -67,7 +69,7 @@ function searchResults (data) {
         results[i].price = dollarUS.format(copyPrices[cryptoId].usd)
 
         const searchResult = document.createElement("tr");
-            searchResult.id = results[i].id
+            searchResult.id = results[i].id;
         
         // const searchId = document.createElement("td");
         //     searchId.textContent = results[i].id;
@@ -82,12 +84,25 @@ function searchResults (data) {
             searchMarketCap.textContent = results[i].market_cap_rank;
 
         const searchPrice = document.createElement("td");
-            searchPrice.textContent = results[i].price
-
-        const addBttn = document.createElement("button")
-            addBttn.textContent = "Add to Watchlist"
-            addBttn.className = "add"
+            searchPrice.textContent = results[i].price;
+            
+        const watchlistSymbol = document.createElement("td");
+            watchlistSymbol.textContent = results[i].symbol;
         
+        const watchlistPrice = document.createElement("td");
+            watchlistPrice.textContent = results[i].price;
+        
+        const addBttn = document.createElement("button");
+            addBttn.textContent = "Add to Watchlist";
+            addBttn.className = "add";
+            addBttn.addEventListener("click", () => {
+                addToWatchlist(watchlistSymbol, watchlistPrice)
+                addBttn.disabled = true;
+            }
+        );
+            
+
+            
             searchResult.append(searchName, searchSymbol, searchMarketCap, searchPrice, addBttn);
             resultsTable.append(searchResult);
         }
@@ -96,6 +111,22 @@ function searchResults (data) {
     
 }
 
+function addToWatchlist(watchlistSymbol, watchlistPrice, addbttn) {
+    
+    const watchlistRow = document.createElement("tr");
+    const deletebttn = document.createElement("button");
+        deletebttn.textContent = "delete";
+        deletebttn.className = "delete";
+        // eventlistener needed 
+
+    
+
+
+    watchlistRow.append(watchlistSymbol, watchlistPrice, deletebttn);
+    watchlistTable.append(watchlistRow);
+
+
+}
 
         //need function to grab ids from results, and put into a string for the fetch above
         //once the fetch is initiated, I need to add the data to results
