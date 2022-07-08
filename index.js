@@ -2,7 +2,7 @@ const BASE_URL = "https://api.coingecko.com/api/v3/search?query=";
 const PRICE_URL = "https://api.coingecko.com/api/v3/simple/price?ids=";
 
 const submitBttn = document.querySelector("#submit-button");
-const exportBttn = document.querySelector("#export")
+const exportBttn = document.querySelector("#export");
 const tickerInput = document.querySelector("#ticker");
 const stockForm = document.querySelector("#stock-form");
 const searchContainer = document.querySelector("#searchContainer");
