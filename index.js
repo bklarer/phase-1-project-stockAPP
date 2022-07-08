@@ -1,5 +1,5 @@
 const BASE_URL = "https://api.coingecko.com/api/v3/search?query=";
-const PRICE_URL = "https://api.coingecko.com/api/v3/simple/price?ids="
+const PRICE_URL = "https://api.coingecko.com/api/v3/simple/price?ids=";
 
 const submitBttn = document.querySelector("#submit-button");
 const exportBttn = document.querySelector("#export")
@@ -8,7 +8,7 @@ const stockForm = document.querySelector("#stock-form");
 const searchContainer = document.querySelector("#searchContainer");
 const resultsTable = document.querySelector("#resultsTable");
 const watchlistTable = document.querySelector("#watchlistTable");
-const tableHTML = '<tr><th>Name</th><th>Symbol</th><th>Market Cap Rank</th><th>Price(USD)</th><th>Add to Watchlist</th></tr>'
+const tableHTML = '<tr><th>Name</th><th>Symbol</th><th>Market Cap Rank</th><th>Price(USD)</th><th>Add to Watchlist</th></tr>';
 
 stockForm.addEventListener("submit", handleSubmit); 
 
@@ -18,60 +18,60 @@ function handleSubmit (e) {
     fetch(BASE_URL + `${tickerInput.value}`)
         .then(resp => resp.json())
         .then(data => {
-            resultsTable.innerHTML = tableHTML
-            console.log(data)
-            searchResults(data)
-            stockForm.reset()
+            resultsTable.innerHTML = tableHTML;
+            console.log(data);
+            searchResults(data);
+            stockForm.reset();
             }
         )
         .catch(error => {
         console.log(error);
-        alert("Server Error")
-        })
+        alert("Server Error");
+        });
 }
 
 
 function searchResults (data) {
-    const results = data.coins.slice(0,10)
-    let priceIds
+    const results = data.coins.slice(0,10);
+    let priceIds;
 
     if(results.length == 0) {
-        console.log("No Results")
-    } else priceIds = results[0]["id"]
+        console.log("No Results");
+    } else priceIds = results[0]["id"];
     
     if (data.coins.length == 0 ) {
-        alert("Crypto not found")
+        alert("Crypto not found");
     } else if (results.length === 1){
-        priceIds = priceIds
-        } else {
-        for(i=1; i<Math.min(10, priceIds.length); i++) {
-            priceIds = priceIds + "%2C" + results[i]["id"]
+        priceIds = priceIds;
+    } else {
+        for(i=1; i<Math.min(10, results.length); i++) {
+        priceIds = priceIds + "%2C" + results[i]["id"];
         } 
     }
 
-    let copyPrices = {}
+    let copyPrices = {};
 
     fetch(PRICE_URL + priceIds + "&vs_currencies=usd")
         .then(priceData => priceData.json())
         .then(prices => {
-            copyPrices = prices
-            tableMaker()
+            copyPrices = prices;
+            tableMaker();
             }
         )
         
         .catch(error => {
             console.log(error);
             alert("Server Error");
-        })
+        });
 
     function tableMaker () {for(i=0; i<Math.min(10, results.length); i++) {
         const cryptoId = results[i].id;
         const dollarUS = Intl.NumberFormat("en-US", {
             style: "currency",
             currency: "USD",
-        })
+        });
         
-        results[i].price = dollarUS.format(copyPrices[cryptoId].usd)
+        results[i].price = dollarUS.format(copyPrices[cryptoId].usd);
 
         const searchResult = document.createElement("tr");
             searchResult.id = results[i].id;
@@ -98,8 +98,8 @@ function searchResults (data) {
             addBttn.textContent = "Add to Watchlist";
             addBttn.className = "add";
             addBttn.addEventListener("click", () => {
-                addToWatchlist(watchlistSymbol, watchlistPrice)
-                searchResult.remove()
+                addToWatchlist(watchlistSymbol, watchlistPrice);
+                searchResult.remove();
             }
         );
             
@@ -117,7 +117,7 @@ function addToWatchlist(watchlistSymbol, watchlistPrice) {
     const deletebttn = document.createElement("button");
         deletebttn.textContent = "delete";
         deletebttn.className = "delete";
-        deletebttn.addEventListener("click", () => watchlistRow.remove())
+        deletebttn.addEventListener("click", () => watchlistRow.remove());
 
 
     watchlistRow.append(watchlistSymbol, watchlistPrice, deletebttn);
@@ -125,20 +125,20 @@ function addToWatchlist(watchlistSymbol, watchlistPrice) {
 
 }
 
-exportBttn.addEventListener("click", exportWatchlist)
+exportBttn.addEventListener("click", exportWatchlist);
 
 function exportWatchlist () {
-    const rows = []
+    const rows = [];
     
     for(let i = 0, row; row = watchlistTable.rows[i]; i++ ) {
         let column1 = row.cells[0].innerText;
-            column1 = column1.replace(",", "")
+            column1 = column1.replace(",", "");
         let column2 = row.cells[1].innerText;
-            column2 = column2.replace(",", "")
+            column2 = column2.replace(",", "");
 
-        console.log(column1, column2)
+        console.log(column1, column2);
 
-        rows.push([column1, column2])
+        rows.push([column1, column2]);
     }
 
     let csvContent = "data:text/csv;charset=utf-8,";
@@ -149,14 +149,14 @@ function exportWatchlist () {
     });
 
     let encodedUri = encodeURI(csvContent);
-    let link = document.createElement("a")
-        link.setAttribute("href", encodedUri)
-        link.setAttribute("donload", "Crypto_Watchlist.csv");
+    let link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "Crypto_Watchlist.csv");
 
     document.body.appendChild(link);
-    link.click()
+    link.click();
     document.body.removeChild(link);
 
 }
 
-document.addEventListener("DOMContentLoaded", handleSubmit)
+document.addEventListener("DOMContentLoaded", handleSubmit);
