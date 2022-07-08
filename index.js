@@ -22,14 +22,12 @@ function handleSubmit (e) {
             console.log(data);
             searchResults(data);
             stockForm.reset();
-            }
-        )
+        })
         .catch(error => {
-        console.log(error);
-        alert("Server Error");
+            console.log(error);
+            alert("Server Error");
         });
 }
-
 
 function searchResults (data) {
     const results = data.coins.slice(0,10);
@@ -56,8 +54,7 @@ function searchResults (data) {
         .then(prices => {
             copyPrices = prices;
             tableMaker();
-            }
-        )
+            })
         
         .catch(error => {
             console.log(error);
@@ -104,11 +101,10 @@ function searchResults (data) {
         );
             
             
-            searchResult.append(searchName, searchSymbol, searchMarketCap, searchPrice, addBttn);
-            resultsTable.append(searchResult);
+        searchResult.append(searchName, searchSymbol, searchMarketCap, searchPrice, addBttn);
+        resultsTable.append(searchResult);
         }
     }
-    
 }
 
 function addToWatchlist(watchlistSymbol, watchlistPrice) {
@@ -119,10 +115,8 @@ function addToWatchlist(watchlistSymbol, watchlistPrice) {
         deletebttn.className = "delete";
         deletebttn.addEventListener("click", () => watchlistRow.remove());
 
-
     watchlistRow.append(watchlistSymbol, watchlistPrice, deletebttn);
     watchlistTable.append(watchlistRow);
-
 }
 
 exportBttn.addEventListener("click", exportWatchlist);
@@ -133,6 +127,7 @@ function exportWatchlist () {
     for(let i = 0, row; row = watchlistTable.rows[i]; i++ ) {
         let column1 = row.cells[0].innerText;
             column1 = column1.replace(",", "");
+        
         let column2 = row.cells[1].innerText;
             column2 = column2.replace(",", "");
 
@@ -156,7 +151,6 @@ function exportWatchlist () {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-
 }
 
 document.addEventListener("DOMContentLoaded", handleSubmit);
