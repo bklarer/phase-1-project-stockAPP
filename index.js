@@ -33,15 +33,13 @@ function searchResults (data) {
     const results = data.coins.slice(0,10);
     let priceIds;
 
-    if(results.length == 0) {
-        console.log("No Results");
-    } else priceIds = results[0]["id"];
-    
-    if (data.coins.length == 0 ) {
+    if (results.length == 0 ) {
         alert("Crypto not found");
     } else if (results.length === 1){
-        priceIds = priceIds;
+        priceIds = results[0]["id"];
     } else {
+        priceIds = results[0]["id"];
+        
         for(i=1; i<Math.min(10, results.length); i++) {
         priceIds = priceIds + "%2C" + results[i]["id"];
         } 
